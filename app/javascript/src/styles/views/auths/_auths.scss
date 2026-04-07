@@ -1,0 +1,12 @@
+#auth-overlay {
+  position: fixed;
+  top: 3.75rem;
+  z-index: 10;
+  right: 1rem;
+}
+
+.auth-flow-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 300px);
+  width: max-content;
+}
