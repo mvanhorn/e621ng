@@ -25,6 +25,10 @@ Auth.renderLoginForm = async function () {
           .addClass("hidden")
           .html(html)
           .appendTo("body");
+
+        Auth._loginForm.find(".st-immersive-input > input")
+          .each((_, input) => new ImmersiveInput($(input)));
+
         resolve(Auth._loginForm);
       },
       error: () => {
@@ -37,3 +41,17 @@ Auth.renderLoginForm = async function () {
 
 $(() => { Auth.init(); });
 export default Auth;
+
+class ImmersiveInput {
+
+  constructor (input) {
+    this.input = input;
+    this.wrapper = input.parent();
+    this.input.on("focus", () => this.wrapper.addClass("focused"));
+    this.input.on("blur", () => this.wrapper.removeClass("focused"));
+
+    this.input.on("input", (event) => {
+      this.wrapper.toggleClass("contentful", event.target.value.length > 0);
+    });
+  }
+}
